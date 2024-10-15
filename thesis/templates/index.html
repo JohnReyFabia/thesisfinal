@@ -1,0 +1,57 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/stylesheet.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  </head>
+
+
+<body>
+        <div class="menu">
+        <img class="psu-logo" src="{% static 'image/psu (2).png' %}" alt="PSU Logo">
+           <nav> 
+            <ul class="nav-list">
+                <li><a href="{% url 'index' %}" > <b style="color: #ff5f29">Home</b></a></li>
+                <li><a href="{% url 'college' %}">College</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+            </ul>
+        </nav>
+
+    </div>
+   
+<div class="container"> 
+<div class="title">
+    <h1>Predictive Analytics of Colleges’ Admission Slot Availability Using Classification Algorithm</h1>
+
+    <hr style=" border-radius: 25px; height:8px;border-width:0; width: 20%; color: #ff5f29;background-color: #ff5f29; margin:10px" >
+
+    <p class="ups">To provide a predictive model of slots availability,
+            accurate and valuable information of each college
+            program offered for the students good management
+            of enrollment, shifting and transferring.</p>
+        </div>
+    
+        <form>
+            <div class="drop-container" id="drop-area">
+                <div>
+                    <img class="drop-logo" src="{% static 'image/cloud.png'%}" alt="Drag & Drop Icon">
+                </div>
+                <h1 class="uploadFile">Drag & Drop To Upload File <br> or</h1>
+                
+                <label class="button" for="input-file">
+                    <input type="file" accept=".csv" id="input-file" hidden>
+                    <a>Browse File</a>
+                </label>
+            </div>
+        </form>
+        
+
+<script src="{% static 'app.js' %}"></script>
+</div>
+
+</body>
+</html>

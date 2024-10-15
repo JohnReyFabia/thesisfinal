@@ -1,0 +1,198 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/stylesheet.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="menu"> 
+        <img class="psu-logo" src="{% static 'image/psu (2).png' %}" alt="PSU Logo">
+        <nav> 
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="college.html">College</a></li>
+                <li><a href="program.html"><i style="color: #ff5f29">Program</i></a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="p-container">
+        <div class="c-container">
+            <h2 id="college-name"></h2>
+            <ul id="program-list"></ul>
+        </div>
+        
+        <div class="y-container">
+            <div class="c-name">
+                <img id="college-image" src="{% static 'image/psu (2).png' %}" alt="College Logo">
+                <a id="college-title">College of Science</a>
+                <img id="college-image-right" src="{% static 'image/psu (2).png' %}" alt="College Logo Right">
+            </div>
+            <div class="year-options">
+                <div id="year-levels">Select a program to view available slot each year levels</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Extract the query parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedCollege = urlParams.get('college');
+
+        // Define the programs, college names, and images for each college
+        const colleges = {
+            'CBA': {
+                name: 'College of Business and Accountancy',
+                programs: ['BS Accountancy/ BSBA MGT Accounting', 'Human Resource Management', 'BSBA Business Economics', 'Financial Management', 'Marketing Management', 'Entrep Franchising and Trading','Entrep Agribusiness' , 'Entrep Innovation and Technology', 'Public Administration'],
+                image: "{% static 'image/CBA logo.png' %}",
+                yearLevels: {
+                    'BS Accountancy/ BSBA MGT Accounting': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Human Resource Management': ['1st Year', '2nd Year', '3rd Year ', '4th Year '],
+                    'BSBA Business Economics': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Financial Management': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Marketing Management': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Entrep Franchising and Trading': ['1st Year', '2nd Year', '3rd Year ', '4th Year '],
+                    'Entrep Agribusiness': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Entrep Innovation and Technology': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Public Administration': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                }
+            },
+            'CS': {
+                name: 'College of Sciences',
+                programs: ['Computer Science','Medical Biology', 'Information Technology', 'Marine Biology', 'Environmental Science', 'Medical Biology'],
+                image: "{% static 'image/CS logo.png' %}",
+                yearLevels: {
+                    'Computer Science': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Medical Biology': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Information Technology': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Marine Biology': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Environmental Science': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                }
+            },
+            'CTE': {
+                name: 'College of Teacher Education',
+                programs: ['Elementary Education', 'Secondary Eduacation - Math', 'Secondary Eduacation - English', 'Secondary Eduacation - Filipino', 'Secondary Eduacation - Science' , 'Secondary Eduacation - Social Science', 'Secondary Eduacation - Values Education', 'Physical Education'],
+                image: "{% static 'image/CTE logo.png' %}",
+                yearLevels: {
+                    'Elementary Education': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Secondary Eduacation - Math': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Secondary Eduacation - English': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Secondary Eduacation - Filipino': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Secondary Eduacation - Science': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Secondary Eduacation - Social Science': ['1st Year', '2nd Year', '3rd Year', '4th Year'  ],
+                    'Secondary Eduacation - Values Education': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Physical Education': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                }
+            },
+            'CCJE': {
+                name: 'College of Criminal Justice Education',
+                programs: ['Criminology'],
+                image: "{% static 'image/CCJE logo.png' %}",
+                yearLevels: {
+                    'Criminology': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                
+                }
+            },
+            'CEAT': {
+                name: 'College of Engineering Architecture and Technology',
+                programs: ['Architecture', 'Civil Engineering', 'Electrical Engineering', 'Mechanical Engineering', 'Petroleum Engineering'],
+                image: "{% static 'image/CEAT logo.png' %}",
+                yearLevels: {
+                    'Architecture': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Civil Engineering': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Electrical Engineering': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Mechanical Engineering': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Petroleum Engineering': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                }
+            },
+            'CAH': {
+                name: 'College of Arts and Humanities',
+                programs: ['Social Work', 'Psychology', 'Political Science', 'Communication', 'Philippine Studies'],
+                image: "{% static 'image/CAH logo.png' %}",
+                yearLevels: {
+                    'Social Work': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Psychology': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Political Science': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Communication': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Philippine Studies': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                }
+            },
+            'CHTM': {
+                name: 'College of Hospitality and Tourism Management',
+                programs: ['Culinary Arts', 'Hotel Resorts', 'Tourism Management'],
+                image: "{% static 'image/CHTM logo.png' %}",
+                yearLevels: {
+                    'Culinary Arts': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Hotel Resorts': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Tourism Management': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                }
+            },
+            'CNHS': {
+                name: 'College of Nursing and Health Sciences',
+                programs: ['Nursing', 'Midwifery', 'Diploma in Midwifery'],
+                image: "{% static 'image/CNHS logo.png' %}",
+                yearLevels: {
+                    'Nursing': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Midwifery': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                    'Diploma in Midwifery': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+                }
+            },
+        };
+
+       // Get the elements to display the college name, programs, and year levels
+       const collegeNameElement = document.getElementById('college-name');
+        const programListElement = document.getElementById('program-list');
+        const collegeTitleElement = document.getElementById('college-title');
+        const collegeImageRightElement = document.getElementById('college-image-right');
+        const yearLevelsElement = document.getElementById('year-levels');
+        collegeTitleElement.style.fontWeight = 'bold';
+
+        // Update the page content based on the selected college
+        if (selectedCollege && colleges[selectedCollege]) {
+            const college = colleges[selectedCollege];
+            
+            // Update the main title with the college name
+            collegeNameElement.textContent = `Programs for ${college.name}`;
+            
+            // Update the list of programs and make them clickable
+            college.programs.forEach(program => {
+                const li = document.createElement('li');
+                li.textContent = program;
+                li.style.cursor = 'pointer';
+                li.addEventListener('click', function() {
+                    displayYearLevels(college.yearLevels[program]);
+                });
+                programListElement.appendChild(li);
+            });
+
+            // Update the college title and the right-side image only
+            collegeTitleElement.textContent = college.name;
+            collegeImageRightElement.src = college.image;
+        } else {
+            collegeNameElement.textContent = 'College not found';
+        }
+
+        // Function to display year levels when a program is clicked
+        function displayYearLevels(yearLevels) {
+        console.log("Displaying Year Levels: ", yearLevels); // Debug log
+        yearLevelsElement.innerHTML = '';
+        if (yearLevels && yearLevels.length > 0) {
+            yearLevels.forEach(year => {
+                const div = document.createElement('div');
+                div.textContent = year;
+                yearLevelsElement.appendChild(div);
+            });
+        } else {
+            yearLevelsElement.textContent = 'No year levels available for this program';
+        }
+    }
+    </script>
+    </body>
+</html>

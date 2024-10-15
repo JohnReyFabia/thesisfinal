@@ -1,0 +1,41 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/stylesheet.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  </head>
+
+
+<body>
+        <div class="menu">
+        <img class="psu-logo" src="{% static 'image/psu (2).png' %}" alt="PSU Logo">
+           <nav> 
+            <ul class="nav-list">
+                <li><a href="{% url 'index' %}" >Home</a></li>
+                <li><a href="{% url 'college' %}" > <b style="color: #ff5f29"> College</b></a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="box-container">
+        <div class="clickableDiv box">CAH</div>
+        <div class="clickableDiv box">CBA</div>
+        <div class="clickableDiv box">CCJE</div>
+        <div class="clickableDiv box">CEAT</div>
+        <div class="clickableDiv box">CHTM</div>
+        <div class="clickableDiv box">CNHS</div>
+        <div class="clickableDiv box">CS</div>
+        <div class="clickableDiv box">CTE</div>
+    </div>
+            <script src="{% static 'app.js' %}">; </script>
+ 
+        </body>
+    </html>
