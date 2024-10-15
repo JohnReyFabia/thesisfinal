@@ -13,14 +13,16 @@
 <body>
     <div class="menu"> 
         <img class="psu-logo" src="{% static 'image/psu (2).png' %}" alt="PSU Logo">
+        {% block content %}
         <nav> 
             <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="college.html">College</a></li>
-                <li><a href="program.html"><i style="color: #ff5f29">Program</i></a></li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'college' %}">College</a></li>
+                <li><a href=""><i style="color: #ff5f29">Program</i></a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
             </ul>
         </nav>
+        {% endblock %}
     </div>
 
     <div class="p-container">

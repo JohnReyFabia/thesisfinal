@@ -1,1 +1,25 @@
 {% load static %}
+
+<html lang="en">
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/stylesheet.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="menu"> 
+        <img class="psu-logo" src="{% static 'image/psu (2).png' %}" alt="PSU Logo">
+        {% block content %}
+        <nav> 
+            <ul class="nav-list">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'college' %}">College</a></li>
+                <li><a href="{% url 'about' %}"><b style="color: #ff5f29"> About Us</b></a></li>
+            </ul>
+        </nav>
+        {% endblock %}
+    </div>
