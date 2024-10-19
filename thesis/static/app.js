@@ -8,7 +8,7 @@
             const selectedCollege = div.textContent.trim();
             
             // Redirect to the program.html page with the selected college as a query parameter
-            window.location.href = `/thesis/college/program/${selectedCollege}/`;
+            window.location.href = `/college/program/${selectedCollege}/`;
         });
     });
 
