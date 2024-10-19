@@ -1,4 +1,5 @@
 {% load static %}
+{% load college_tags %}
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,15 +41,24 @@
     </div>
 
     <div class="box-container">
-      <div class="clickableDiv box">CAH</div>
-      <div class="clickableDiv box">CBA</div>
-      <div class="clickableDiv box">CCJE</div>
-      <div class="clickableDiv box">CEAT</div>
-      <div class="clickableDiv box">CHTM</div>
-      <div class="clickableDiv box">CNHS</div>
-      <div class="clickableDiv box">CS</div>
-      <div class="clickableDiv box">CTE</div>
+      <div class="row gy-5 justify-content-center" style="display: flex; flex-wrap: wrap; ">
+        {% get_all_college as colleges %}
+        {% for college in colleges %}
+        
+          <a class="college-box" href="{% url 'program' code=college.code %}">
+            <div class="box">
+              {{ college.code }}
+            </div>
+          </a>
+         
+          {% if forloop.counter|divisibleby:4 and not forloop.last %}
+          </div>
+          <div class="row gy-4 justify-content-center" style="display: flex; flex-wrap: wrap; margin-top: 20px;">
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
+    
     <script src="{% static 'app.js' %}">
       ;
     </script>
