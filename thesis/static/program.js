@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); 
             
             const programName = this.getAttribute('data-program-name');
-            console.log('Program Name:', programName); // Log program name
+            console.log('Program Name:', programName); 
             console.log('College Code:', collegeCode);
 
         

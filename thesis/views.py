@@ -29,6 +29,7 @@ def program_view(request, code):
         'selected_college': selected_college,
         'college_programs': college_programs
         }
+    
     return render(request, 'program.html', context)
 
 def get_selected_program(request, code, program_name):
@@ -54,6 +55,7 @@ def get_selected_program(request, code, program_name):
             'year': program_slot.year.year,  
             'no_of_slots': program_slot.no_of_slot  
         }
+        
         program_details['years'].append(program_year_data)
 
     return JsonResponse(program_details)
