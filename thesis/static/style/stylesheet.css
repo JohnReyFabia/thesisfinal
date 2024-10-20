@@ -176,7 +176,7 @@ a:hover {
 
 }
 
-.c-container li:hover{
+.c-container li:hover {
     background-color: #fe5e14;
     color: rgb(255, 255, 255);
     border-radius: 10px;
@@ -184,6 +184,15 @@ a:hover {
     justify-content: center;
     text-align: center;
     align-items: center;
+}
+
+.c-container li a.program-link {
+    text-decoration: none;
+    color: black;
+}
+
+.c-container li:hover a.program-link {
+    color: white;
 }
 
 .y-container {
