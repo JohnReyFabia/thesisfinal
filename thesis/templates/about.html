@@ -23,3 +23,139 @@
         </nav>
         {% endblock %}
     </div>
+
+    <div class = "section">
+        <div class="container-body"> 
+        <div class="title">
+            <h1>About us</h1>
+            <div class="image-container">
+                <img src="{% static 'image/Untitled-2.jpg' %}" alt="Predictive Analytics" width="600" height="470">
+             </div>
+            <hr style=" border-radius: 25px; height:3px;border-width:0; width: 35%; color: #ff5f29;background-color: #ff5f29; margin:1px" >
+        
+            <p class="ups">The study "Predictive Analytics of Colleges’ Admission Slot Availability Using Classification Algorithm" aimed to help Palawan State University manage program slot allocations by predicting slot availability. Researchers compared four algorithms—Random Forest, Logistic Regression, Support Vector Machine (SVM), and Gaussian Naïve Bayes—using a confusion matrix to assess their effectiveness.
+        
+                The Random Forest algorithm emerged as the most accurate, achieving 97.38% accuracy and demonstrating high precision with a Mean Absolute Error of 53.14 and a Root Mean Squared Error of 88.94. The findings suggest that predictive analytics, especially using Random Forest, can enhance decision-making and resource allocation in the university's admissions process.
+            </p>
+                   
+        
+        <!-- Read more button -->
+        <label class="button">
+            <a id="readMoreBtn">Read more</a>
+        </label>
+        
+        <!-- Modal structure -->
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Researcher Information</h2>
+            
+            <div class="card">
+              <img class="card-img-top" src="{% static 'image/love.png' %}" alt="Rose Jean Aban">
+              <div class="card-body">
+                <h4 class="card-title">Rose Jean Aban</h4>
+                <p class="card-text">Computer Science Student</p>
+                <p class="card-text">Miss Aban contributed to the development of a predictive analytics model for the accomplishment of project objectives in project management.</p>
+          
+                <!-- Social media icons -->
+                <div class="social-icons">
+                  <a href="https://www.facebook.com" target="_blank">
+                      <i class="fab fa-facebook" style="font-size: 24px; color: #3b5998;"></i>
+                  </a>
+                  <a href="https://www.instagram.com" target="_blank" style="margin-left: 10px;">
+                      <i class="fab fa-instagram" style="font-size: 24px; color: #E4405F;"></i>
+                  </a>
+                </div>
+              </div>
+          </div>
+          
+          
+        
+        
+            <!-- Researcher 2 -->
+            <div class="card">
+                <img class="card-img-top" src="{% static 'image/fabs.jpg' %}" alt="Researcher 2 Image">
+                <div class="card-body">
+                  <h4 class="card-title">John Rey Fabia</h4>
+                  <p class="card-text">Computer Science Student</p>
+                  <p class="card-text">Mr Fabia specializes in UI and data modeling, contributing to thesis projects that improve user experience and optimize data structures. 
+        
+                  </p>
+                </div>
+            </div>
+        
+            <!-- Researcher 3 -->
+            <div class="card">
+                <img class="card-img-top" src="{% static 'image/elaine.jpg' %}" alt="Researcher 3 Image">
+                <div class="card-body">
+                  <h4 class="card-title">Elaine Mae Llacuna</h4>
+                  <p class="card-text">Computer Science Student</p>
+                  <p class="card-text">Miss Llacuna is a dedicated team leader who guides and supports her team to achieve their goals. She ensures collaboration, motivates team members, and helps maintain a productive and positive work environment.
+        
+                  </p>
+                </div>
+            </div>
+        
+            <!-- Researcher 4 -->
+            <div class="card">
+                <img class="card-img-top" src="{% static 'image/arman.jpg' %}" alt="Researcher 4 Image">
+                <div class="card-body">
+                  <h4 class="card-title">Arman Vicente</h4>
+                  <p class="card-text">Computer Science Student</p>
+                  <p class="card-text">Mr Vicente has specialized in data modeling that focuses on improving data models for efficient information retrieval and processing.
+        
+                  </p>
+                </div>
+            </div>
+        
+            <!-- Researcher 5 -->
+            <div class="card">
+                <img class="card-img-top" src="{% static 'image/jec.jpg'%}" alt="Researcher 5 Image">
+                <div class="card-body">
+                  <h4 class="card-title">Jeco Roxas</h4>
+                  <p class="card-text">Computer Science Student</p>
+                  <p class="card-text">Mr Roxas is a dedicated UI designer for the thesis project who creates intuitive user interfaces, focusing on delivering exceptional user experiences through thoughtful design and functionality.
+        
+                  </p>
+                </div>
+            </div>
+        
+          </div>
+        </div>
+        
+        
+        
+        <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the button that opens the modal
+        var btn = document.getElementById("readMoreBtn");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        </script>
+        
+                
+        <script src="app.js"></script>
+        </div>
+
+
+
+    </body>
+    </html>
