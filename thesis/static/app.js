@@ -1,60 +1,99 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     console.log("Script loaded");
+document.addEventListener('DOMContentLoaded', function () {
+    const dropArea = document.getElementById('drop-area');
+    const inputFile = document.getElementById('input-file');
+    const uploadIcon = document.getElementById('upload-icon');
+    let uploadedFile = null;
 
-    // Handle clicking on .clickableDiv elements
-    document.querySelectorAll('.clickableDiv').forEach(function(div) {
-        div.addEventListener('click', function() {
-            // Get the text of the clicked div (e.g., "CBA", "CS", etc.)
-            const selectedCollege = div.textContent.trim();
-            
-            // Redirect to the program.html page with the selected college as a query parameter
-            window.location.href = `/college/program/${selectedCollege}/`;
-        });
+    dropArea.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropArea.style.borderColor = '#000';
     });
 
-    // Drag-and-drop functionality setup
-    const dropArea = document.getElementById('drop-area');
-    const fileInput = document.getElementById('input-file');
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.style.borderColor = '#ccc';
+    });
 
-    if (dropArea && fileInput) {
-        // Prevent default behavior for dragover and drop
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
-            dropArea.addEventListener(event, e => e.preventDefault());
-            dropArea.addEventListener(event, e => e.stopPropagation());
-        });
+    dropArea.addEventListener('drop', (event) => {
+        event.preventDefault();
+        dropArea.style.borderColor = '#ccc';
+        const files = event.dataTransfer.files;
+        if (files.length && files[0].type === 'text/csv') {
+            uploadedFile = files[0];
+            showMagicButton();
+            displayCSVIcon(); // Show the CSV icon
+        } else {
+            alert('Please upload a CSV file.');
+        }
+    });
 
-        // Add visual feedback on dragover
-        dropArea.addEventListener('dragover', () => {
-            dropArea.classList.add('dragover');
-        });
+    inputFile.addEventListener('change', (event) => {
+        const files = event.target.files;
+        if (files.length && files[0].type === 'text/csv') {
+            uploadedFile = files[0];
+            displayCSVIcon(); // Show the CSV icon
+            // Show Magic Button after file is uploaded
+            showMagicButton();
+        } else {
+            alert('Please upload a CSV file.');
+        }
+    });
 
-        // Remove feedback on dragleave
-        dropArea.addEventListener('dragleave', () => {
-            dropArea.classList.remove('dragover');
-        });
-
-        // Handle the file drop
-        dropArea.addEventListener('drop', (event) => {
-            dropArea.classList.remove('dragover');
-            const files = event.dataTransfer.files;
-
-            // Check if file is a CSV
-            if (files.length && files[0].type === 'text/csv') {
-                fileInput.files = files; // Programmatically set the input file
-                alert('File dropped successfully!');
-            } else {
-                alert('Please upload a CSV file.');
-            }
-        });
-
-        // Handle the input click
-        fileInput.addEventListener('change', (event) => {
-            const files = event.target.files;
-            if (files.length) {
-                alert(`File selected: ${files[0].name}`);
-            }
-        });
-    } else {
-        console.error("Drop area or file input not found in the DOM.");
+    function getCSRFToken() {
+        const cookieValue = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
+        return cookieValue ? cookieValue.split('=')[1] : null;
     }
-// });
+
+    function displayCSVIcon() {
+        // Change the icon to a CSV icon
+        uploadIcon.src = "/static/image/csv.png"; // Ensure the path matches your setup
+        uploadIcon.alt = "CSV Icon";
+    }
+
+    function showMagicButton() {
+        const magicButtonContainer = document.getElementById('magicButtonContainer');
+        magicButtonContainer.innerHTML = '<button id="magicButton" class="magicbutton">Apply Prediction Model</button>';
+        document.getElementById('magicButton').addEventListener('click', function() {
+            applyModelAndDisplayResults()
+            alert('Successfully applied the prediction model!');
+
+        });
+    }
+    
+    function applyModelAndDisplayResults() {
+        return new Promise((resolve, reject) => {
+            if (uploadedFile) {
+                const formData = new FormData();
+                formData.append('file', uploadedFile);
+    
+                fetch('/upload/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCSRFToken(),
+                    },
+                    body: formData,
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        console.error('Server error:', data.error);
+                        reject(data.error);
+                    } else {
+                        resolve(data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    reject(error);
+                });
+            } else {
+                alert('No file uploaded.');
+                reject('No file uploaded.');
+            }
+        });
+    }
+    
+    
+});

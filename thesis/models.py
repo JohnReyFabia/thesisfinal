@@ -44,3 +44,26 @@ class ProgramSlot(models.Model):
     
     class Meta:
         verbose_name_plural = "Program Slots"
+
+class ProcessedData(models.Model):
+    programs = models.CharField(max_length=255)
+    year_20_21 = models.FloatField()
+    year_22_23 = models.FloatField()
+    year_23_24 = models.FloatField()
+    predicted_slots = models.FloatField()
+
+    def __str__(self):
+        return self.programs
+
+
+class Prediction(models.Model):
+    program = models.ForeignKey('Program', on_delete=models.CASCADE, default=1)  # Default to the ID 1 Program
+    year = models.ForeignKey('CurriculumYear', on_delete=models.CASCADE, default=1)  # Default to the ID 1 CurriculumYear
+    no_of_slot = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    input_data = models.JSONField()  # Assuming input data is stored as JSON
+    predicted_result = models.FloatField()
+
+    def __str__(self):
+        return f"{self.program.program_name}"
+

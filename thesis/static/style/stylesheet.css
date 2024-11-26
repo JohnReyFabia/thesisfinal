@@ -94,13 +94,13 @@ a:hover {
     padding-right: 20px;
     border-radius:10px;
 }
+
 .button a:hover {
     color: rgb(254, 254, 254);
     -ms-zoom-animation:default;
     background: rgb(0, 0, 0);
     transition: all 0.3s ease;
 }
-
 
 .box-container {
     display:flex;
@@ -483,6 +483,32 @@ a.college-box {
   color:black;
 }  
 
+
 .section .container-body .title {
   margin-top: -80px;
+}
+
+.magicbutton{
+  font-family: "poppins";
+  color: rgb(255, 255, 255);
+  background-color: #000dff;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius:10px;
+  margin: 20px auto; 
+  display: block; 
+  text-align: center; 
+}
+
+.magicbutton:hover{
+  color: rgb(255, 255, 255);
+  -ms-zoom-animation:default;
+  background: rgb(0, 0, 0);
+  transition: all 0.3s ease;
+}
+
+#magicButtonContainer { 
+  text-align: center; 
 }

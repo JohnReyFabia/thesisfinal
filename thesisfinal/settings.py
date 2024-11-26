@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'thesis.middleware.ResetNoOfSlotMiddleware',
 ]
 
 ROOT_URLCONF = 'thesisfinal.urls'
@@ -128,3 +129,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'thesis/static')]
+

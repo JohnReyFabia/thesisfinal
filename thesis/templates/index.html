@@ -1,4 +1,5 @@
 {% load static %}
+
 <html lang="en">
 <head>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -35,20 +36,23 @@
             of enrollment, shifting and transferring.</p>
         </div>
     
-        <form>
-            <div class="drop-container" id="drop-area">
-                <div>
-                    <img class="drop-logo" src="{% static 'image/cloud.png'%}" alt="Drag & Drop Icon">
-                </div>
-                <h1 class="uploadFile">Drag & Drop To Upload File <br> or</h1>
-                
-                <label class="button" for="input-file">
-                    <input type="file" accept=".csv" id="input-file" hidden>
-                    <a>Browse File</a>
-                </label>
-            </div>
-        </form>
-        
+<form id="uploadFile" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="drop-container" id="drop-area">
+        <div>
+            <img class="drop-logo" src="/static/image/cloud.png" alt="Drag & Drop Icon" id="upload-icon">
+        </div>
+        <h1 class="uploadFile">Drag & Drop To Upload File <br> or</h1>
+        <label class="button" for="input-file">
+            <input type="file" accept=".csv" id="input-file" hidden>
+            <a>Browse File</a>
+        </label>
+    </div>
+    <div class="magic" id="magicButtonContainer"></div>
+    <div id="predictionResults"></div>
+</form>
+
+
 
 <script src="{% static 'app.js' %}"></script>
 </div>
