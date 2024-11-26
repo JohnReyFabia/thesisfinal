@@ -72,6 +72,10 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from .models import ProcessedData, ProgramSlot, Program, CurriculumYear, College
 
+from sklearn.metrics import accuracy_score, mean_squared_error, r2_score
+import numpy as np
+
+
 def upload_file(request):
     if request.method == 'POST' and request.FILES.get('file'):
         file = request.FILES['file']
@@ -116,6 +120,12 @@ def upload_file(request):
                 predictions = regressor.predict(X)
                 print("Predictions:", predictions)
 
+                # Calculate accuracy metrics 
+                mse = mean_squared_error(y, predictions)
+                r2 = r2_score(y, predictions) 
+                print(f"Mean Squared Error: {mse}")
+                print(f"R2 Score: {r2}")
+
                 # Subtract S1_20-21 from the predictions, round to nearest whole number, and store in predicted_slots
                 dataset['predicted_slots'] = (dataset['S1_20-21'] - predictions).round().astype(int)
                 print("Predictions after subtraction and rounding:", dataset['predicted_slots'])
@@ -126,6 +136,7 @@ def upload_file(request):
 
                 # Print the entire dataset for debugging
                 print("Dataset after adding predictions:\n", dataset.head())
+
 
                 # Fetch existing programs and years from ProgramSlot
                 program_slots = ProgramSlot.objects.all()
@@ -169,6 +180,8 @@ def upload_file(request):
                 response_data = dataset[['PROGRAMS', 'S2_22-23', 'S2_20-21', 'S2_23-24', 'predicted_slots']].to_dict(orient='records')
                 return JsonResponse({'data': response_data}, safe=False)
 
+
+        
             except ValueError as ve:
                 print(f"ValueError: {ve}")
                 return JsonResponse({'error': str(ve)}, status=400)
